@@ -2,7 +2,7 @@ defmodule OtpSupervisor.Cache do
   use GenServer
 
   def init(_) do
-    {:ok, %{}}
+    {:ok, %{node: node()}}
   end
 
   def start_link(_) do
