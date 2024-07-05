@@ -1,0 +1,18 @@
+services:
+  node_one:
+    build: ./otp_supervisor
+    tty: true
+    environment:
+      - NODE_NAME=node_one
+  node_two:
+    build: ./otp_supervisor
+    tty: true
+    environment:
+      - NODE_NAME=node_two
+  load_balancer:
+    build: ./load_balancer
+    depends_on:
+      - node_one
+      - node_two
+    ports:
+      -  3000:80

@@ -7,8 +7,8 @@ defmodule OtpSupervisor.Application do
 
     topologies = [
       OtpSupervisor: [
-        strategy: Cluster.Strategy.LocalEpmd,
-        config: [hosts: [:"node_one@127.0.0.1", :"node_two@127.0.0.1"]]
+        strategy: Cluster.Strategy.Epmd,
+        config: [hosts: [:"node@node_one", :"node@node_two"]]
       ]
     ]
 
