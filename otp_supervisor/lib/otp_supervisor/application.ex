@@ -4,7 +4,8 @@ defmodule OtpSupervisor.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Bandit, plug: OtpSupervisor.Router, scheme: :http}
+      {Bandit, plug: OtpSupervisor.Router, scheme: :http},
+      {OtpSupervisor.Cache, []}
     ]
     opts = [strategy: :one_for_one, name: OtpSupervisor.Supervisor]
     Supervisor.start_link(children, opts)

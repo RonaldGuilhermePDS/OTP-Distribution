@@ -13,8 +13,11 @@ defmodule OtpSupervisor.Router do
   end
 
   get "/get" do
+    values = OtpSupervisor.Cache.get()
+
     response =
       %{ time: DateTime.utc_now() }
+      |> Map.merge(values)
       |> Jason.encode!()
 
     conn
@@ -25,11 +28,15 @@ defmodule OtpSupervisor.Router do
   get "/put" do
     %{"key" => key, "value" => value} = URI.decode_query(conn.query_string)
 
+    OtpSupervisor.Cache.put(key, value)
+    values = OtpSupervisor.Cache.get()
+
     response =
     %{
       time: DateTime.utc_now(),
       "#{key}": value
     }
+    |> Map.merge(values)
     |> Jason.encode!()
 
     conn
