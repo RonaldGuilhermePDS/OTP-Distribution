@@ -8,7 +8,7 @@ defmodule OtpSupervisor.Router do
     response = "<h1>Hello, OTP Distribution!</h1>"
 
     conn
-    |> put_resp_content_type("text/html")
+    |> put_resp_content_type("application/json")
     |> send_resp(200, response)
   end
 
@@ -47,7 +47,7 @@ defmodule OtpSupervisor.Router do
   match _ do
     conn
     |> put_status(404)
-    |> put_resp_content_type("text/plain")
+    |> put_resp_content_type("application/json")
     |> send_resp(404, "Not Found")
   end
 end

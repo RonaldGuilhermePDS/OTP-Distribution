@@ -24,7 +24,8 @@ defmodule OtpSupervisor.MixProject do
     [
       {:plug, "~> 1.16.1"},
       {:bandit, "~> 1.5.5"},
-      {:jason, "~> 1.4.3"}
+      {:jason, "~> 1.4.3"},
+      {:libcluster, "~> 3.3.3"}
     ]
   end
 end
