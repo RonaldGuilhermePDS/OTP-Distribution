@@ -13,7 +13,7 @@ defmodule OtpSupervisor.Router do
   end
 
   get "/get" do
-    values = OtpSupervisor.Cache.get()
+    values = Cache.get()
 
     response =
       %{
@@ -31,8 +31,8 @@ defmodule OtpSupervisor.Router do
   get "/put" do
     %{"key" => key, "value" => value} = URI.decode_query(conn.query_string)
 
-    OtpSupervisor.Cache.put(key, value)
-    values = OtpSupervisor.Cache.get()
+    Cache.put(key, value)
+    values = Cache.get()
 
     response =
     %{
