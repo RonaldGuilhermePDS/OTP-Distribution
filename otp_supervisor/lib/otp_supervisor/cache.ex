@@ -18,6 +18,20 @@ defmodule OtpSupervisor.Cache do
     {:noreply, state}
   end
 
+  def handle_cast({ :put_state, state }, _state) do
+    {:noreply, state}
+  end
+
+  def handle_cast(:sync, state) do
+    :rpc.multicall(Node.list(), __MODULE__, :put_state, [state])
+    {:noreply, state}
+  end
+
   def get, do: GenServer.call(__MODULE__, :get)
+
   def put(key, value), do: GenServer.cast(__MODULE__, { :put, key, value })
+
+  def put_state(state), do: GenServer.cast(__MODULE__, { :put_state, state })
+
+  def sync, do: GenServer.cast(__MODULE__, :sync)
 end
