@@ -30,7 +30,7 @@ defmodule OtpSupervisor.Application do
     opts = [strategy: :one_for_one, name: OtpSupervisor.Supervisor]
     supervisor_state = Supervisor.start_link(children, opts)
 
-    :timer.sleep(1000)
+    :timer.sleep(:rand.uniform(1000))
     CacheSupervisor.start_child()
 
     supervisor_state
