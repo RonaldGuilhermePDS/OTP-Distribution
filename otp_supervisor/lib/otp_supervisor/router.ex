@@ -16,7 +16,10 @@ defmodule OtpSupervisor.Router do
     values = OtpSupervisor.Cache.get()
 
     response =
-      %{ time: DateTime.utc_now() }
+      %{
+        actual_node: node(),
+        time: DateTime.utc_now()
+      }
       |> Map.merge(values)
       |> Jason.encode!()
 
@@ -33,6 +36,7 @@ defmodule OtpSupervisor.Router do
 
     response =
     %{
+      actual_node: node(),
       time: DateTime.utc_now(),
       "#{key}": value
     }

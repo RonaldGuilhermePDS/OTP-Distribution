@@ -15,6 +15,7 @@ defmodule OtpSupervisor.Cache do
 
   def handle_cast({ :put, key, value }, state) do
     state = Map.put(state, key, value)
+    GenServer.cast(__MODULE__, :sync)
     {:noreply, state}
   end
 
@@ -28,10 +29,7 @@ defmodule OtpSupervisor.Cache do
   end
 
   def get, do: GenServer.call(__MODULE__, :get)
-
   def put(key, value), do: GenServer.cast(__MODULE__, { :put, key, value })
-
   def put_state(state), do: GenServer.cast(__MODULE__, { :put_state, state })
-
   def sync, do: GenServer.cast(__MODULE__, :sync)
 end
