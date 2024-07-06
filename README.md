@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/RonaldGuilhermePDS/OTP-Distribution">
-    <img src="./docs/elixir-logo.png" alt="elixir-logo">
+    <img src="./docs/elixir-logo.png" alt="elixir-logo" width="200" height="200">
   </a>
 </p>
 
