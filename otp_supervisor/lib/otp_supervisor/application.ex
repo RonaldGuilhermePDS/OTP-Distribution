@@ -3,12 +3,14 @@ defmodule OtpSupervisor.Application do
 
   @impl true
   def start(_type, _args) do
-    { port, _} = System.get_env("PORT", "4000") |> Integer.parse()
+    { port, _} =
+      System.get_env("PORT", "4000")
+      |> Integer.parse()
 
     topologies = [
       OtpSupervisor: [
-        strategy: Cluster.Strategy.Epmd,
-        config: [hosts: [:"node@node_one", :"node@node_two"]]
+        strategy: Cluster.Strategy.LocalEpmd,
+        config: [hosts: [ "node@node_one,node@node_two" ]]
       ]
     ]
 
@@ -27,7 +29,9 @@ defmodule OtpSupervisor.Application do
         port: port
       },
     ]
+
     opts = [strategy: :one_for_one, name: OtpSupervisor.Supervisor]
+
     supervisor_state = Supervisor.start_link(children, opts)
 
     :timer.sleep(:rand.uniform(1000))
